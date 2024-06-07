@@ -20,17 +20,17 @@ jobs:
       - name: Configure AWS credientials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-        access_key_id: ${{ secrets.ACCESS_KEY_ID }}
-        aes_secret_access_key_id: ${{ secrets.AES_SECRET_ACCESS_KEY_ID }}
-        aws-region: eu-north-1
+         access_key_id: ${{ secrets.ACCESS_KEY_ID }}
+         aes_secret_access_key_id: ${{ secrets.AES_SECRET_ACCESS_KEY_ID }}
+         aws-region: eu-north-1
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-action/amazon-ecr-login@v1
       - name: Build, tag, and push image to Amazon ECR
         env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: diamondpriceprediction
-        IMAGE_TAG: latest
+         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+         ECR_REPOSITORY: diamondpriceprediction
+         IMAGE_TAG: latest
         run:
          docker build -t $ECR_REGISTRY/ECR_REPOSITORY:$IMAGE_TAG .
          docker push $ECR_REGISTRY/ECR_REPOSITORY:$IMAGE_TAG
